@@ -1,0 +1,109 @@
+<html>
+  <body>
+      <div id="seqs">
+        <div id="seqA">
+          Click here for Sequence A
+        </div>
+        <div id="seqB">
+          Click here for Sequence B
+        </div>
+        <div id="seqAe">
+          Click here for sequence A with beta optimisations
+        </div>
+        <div id="seqBe">
+          Click here for sequence B with beta optimisations
+        </div>
+      </div>
+    <div id="mix"></div>
+
+    <script type="text/javascript" src="jquery-1.5.1.js"></script>
+    <script type="text/javascript" src="jquery.log.js"></script>
+    <script type="text/javascript" src="mixandmash.js"></script>
+    <script>
+      $(document).ready(function(){
+        var seq_a_settings = {
+            queue :  new Array (
+              { id: 'u1zgFlCw8Aw', startSeconds: '22',   endSeconds: '28' },
+              { id: 'u1zgFlCw8Aw', startSeconds: '127',  endSeconds: '140' },
+              { id: 'L5ebSn9HgJ4', startSeconds: '3019', endSeconds: '3040'},
+              { id: 'u1zgFlCw8Aw', startSeconds: '195',  endSeconds: '199'}
+            ),
+            autostart : true,
+            levels_of_buffering : 3,
+            ytplayer_vars : {
+              height: '600',
+              width: '800',
+              playerVars: {
+                 color1: 0x00FFFF,
+                 color2: 0x111166
+              }
+            }
+          };
+
+        var seq_b_settings = {
+            queue :  new Array (
+              { id: 'yFhFu25TGxM', startSeconds: '2',    endSeconds: '10'},
+              { id: 'tgGxi3hiOnY', startSeconds: '00',   endSeconds: '11'},
+              { id: 'B4Y_2V5caQk', startSeconds: '23',   endSeconds: '33'},
+              { id: 'x5tj9uSc2_4', startSeconds: '8',    endSeconds: '29'}
+            ),
+            autostart : false,
+            levels_of_buffering : 3,
+          };
+
+        var seq_a_exp_settings = {
+            queue :  new Array (
+              { id: 'u1zgFlCw8Aw', startSeconds: '22',   endSeconds: '28' },
+              { id: 'u1zgFlCw8Aw', startSeconds: '127',  endSeconds: '140' },
+              { id: 'L5ebSn9HgJ4', startSeconds: '3019', endSeconds: '3040'},
+              { id: 'u1zgFlCw8Aw', startSeconds: '195',  endSeconds: '199'}
+            ),
+            autostart : true,
+            levels_of_buffering : 3,
+            opt_preplay : true,               // start backbuffer playback earlier to better synchronize transition
+            opt_leadin_time : 500,            // how long a leadin to use for backbuffer
+            opt_seek_is_free: true,           // presume seeking in a buffered clip is cheap
+            ytplayer_vars : {
+              height: '600',
+              width: '800',
+              playerVars: {
+                 color1: 0x00FFFF,
+                 color2: 0x111166
+              }
+            }
+          };
+
+        var seq_b_exp_settings = {
+            queue :  new Array (
+              { id: 'yFhFu25TGxM', startSeconds: '2',    endSeconds: '10'},
+              { id: 'tgGxi3hiOnY', startSeconds: '00',   endSeconds: '11'},
+              { id: 'B4Y_2V5caQk', startSeconds: '23',   endSeconds: '33'},
+              { id: 'x5tj9uSc2_4', startSeconds: '8',    endSeconds: '29'}
+            ),
+            autostart : false,
+            opt_preplay : true,               // start backbuffer playback earlier to better synchronize transition
+            opt_leadin_time : 500,            // how long a leadin to use for backbuffer
+            opt_seek_is_free: true,           // presume seeking in a buffered clip is cheap
+            levels_of_buffering : 3,
+          };
+
+        $('#seqA').click(function() {
+	        $('#mix').mixandmash(seq_a_settings);
+	        $('#seqs').hide(); } );
+
+        $('#seqB').click(function() {
+        	$('#seqs').replaceWith('<div>Click play to start (not autoplaying)!');
+	        $('#mix').mixandmash(seq_b_settings); } );
+
+        $('#seqAe').click(function() {
+	        $('#mix').mixandmash(seq_a_exp_settings);
+	        $('#seqs').hide(); } );
+
+        $('#seqBe').click(function() {
+        	$('#seqs').replaceWith('<div>Click play to start (not autoplaying)!');
+	        $('#mix').mixandmash(seq_b_exp_settings); } );
+      });
+    </script>
+  </body>
+</html>
+
